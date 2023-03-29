@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Convert px to rem for css, sass, less, and stylus with this user-friendly converter tool. Easily convert files or specific parts of your code to responsive units.">
+  <title>PX to REM Code/File Converter - CSS, Scss, Sass, Less, Stylus | Units, Code & File</title>
+  <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://kit.fontawesome.com/02923f1126.js" crossorigin="anonymous"></script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <span class="logo"><img src="./images/logo.png" alt="Logo">pixel-rem</span>
+      <button class="contact-button primary-button"><i class="fa fa-envelope"></i>Contact me</button>
+    </nav>
+  </header>
+  <div class="donation-banner-container">
+    <section class="donation-banner">
+      <button id="toggle-banner" class="caret-button primary-button"><i class="fa fa-caret-up"></i></button>
+      <div class="donation-banner-content">
+        <div class="donation-message">
+          <h4 class="donation-title">
+            <img src="./images/chrome_logo.svg" alt="Google Chrome logo icon">
+            <span>Get this tool as a Chrome extension!</span>
+          </h4>
+          <ul>
+            <li><strong>Copy a px value and paste it converted to rem</strong></li>
+            <li>Custom keybinds</li>
+            <li>All features from this page are included</li>
+          </ul>
+        </div>
+        <a href="https://www.buymeacoffee.com/aleksandar.dev" id="donate-button" target="_blank"><i class="fa-solid fa-heart"></i>Donate</a>
+        <p><i class="fa-solid fa-circle-info"></i> Support me for $2 or more on “Buy me a Coffee”</p>
+      </div>
+    </section>
+  </div>
+  <div class="main-container">
+    <main>
+      <section>
+        <h2>Bidirectional Pixel to Rem Converter</h2>
+        <p><i class="fa-solid fa-circle-info"></i> Directly convert between px and rem values with ease.</p>
+        <label for="bc-base-size">Base size (1rem):</label>
+        <input type="number" id="bc-base-size" value="16">
+        <div id="bc-inputs-container">
+          <div class="bc-input-group">
+            <label for="bc-input-1">Px</label>
+            <input type="number" id="bc-input-1" placeholder="Enter a value">
+          </div>
+          <button type="button" id="bc-switch-button"><i class="fa fa-exchange"></i></button>
+          <div class="bc-input-group">
+            <label for="bc-input-2">Rem</label>
+            <input type="number" id="bc-input-2" placeholder="Enter a value">
+          </div>
+        </div>
+        <button id="bc-copy-button" type="button"><i class="fa fa-clipboard"></i> <span>Copy (rem)</span></button>
+      </section>     
+  
+      <section>
+        <h2>Convert CSS, SCSS, SASS, LESS, and Stylus Code</h2>
+        <p><i class="fa-solid fa-circle-info"></i> Paste your CSS, SCSS, SASS, LESS, or Stylus code here to convert all px values to rem.</p>
+        <label for="textarea-base-size">Base size (1rem):</label>
+        <input type="number" id="textarea-base-size" value="16">
+        <div class="textarea-wrapper">
+          <textarea id="original-text" rows="10" cols="30" placeholder="Paste your CSS code here"></textarea>
+          <textarea id="converted-text" rows="10" cols="30" placeholder="Converted CSS code" readonly></textarea>
+        </div>
+        <button id="textarea-convert-button" type="button"><i class="fa fa-exchange"></i> Convert</button>
+        <button id="textarea-copy-button" type="button"><i class="fa fa-clipboard"></i> Copy</button>
+      </section>    
+  
+      <section class="file-uploader">
+        <h2>Upload CSS, SCSS, SASS, LESS, or Stylus File</h2>
+        <p><i class="fa-solid fa-circle-info"></i> Select a CSS, SCSS, SASS, SCSS, LESS, or Stylus file to convert all px values to rem.</p>
+        <form id="file-converter-form">
+          <label for="file-base-size">Base size (1rem):</label>
+          <input type="number" id="file-base-size" value="16">
+          <div class="custom-file-uploader">
+            <input type="file" id="css-file-input" accept=".css,.scss,.sass,.less,.styl" hidden>
+            <button type="button" id="file-choose-button"><i class="fa fa-upload"></i> Choose file</button>
+            <span id="file-name">No file chosen</span>
+          </div>
+          <button type="submit"><i class="fa fa-exchange"></i> Convert</button>
+        </form>
+        <a href="#" id="download-link"><i class="fa fa-download"></i> Download converted file</a>
+      </section>
+      
+      <section class="tool-description">
+        <h1>Pixel to REM Converter: Bulk Conversion Made Easy</h1>
+        <p>
+          As a web developer, I created the Pixel to REM Converter because I wasn't able to find a tool for converting blocks of text or entire files from pixel (px) values to relative (rem) units. I wanted to convert all px values to rem in a simple way, but had to do it one by one all the time. That's why I made this tool!
+        </p>
+        <p>
+          To use the Pixel to REM Converter, just input your base font size and the desired px value, click on convert and then copy the generated rem value directly. For the file px to rem converter you will have to choose a file and then follow the same steps. Hopefully this saves you a lot of time! Feel free to support me if you'd like :)
+        </p>
+      </section>
+  
+      <section>
+        <article>
+          <h2>Understanding the Differences Between Pixels (px) and Rem Units</h2>
+          <p>
+            Choosing the right CSS units is crucial for creating flexible and scalable designs when designing websites and managing styles. Pixels (px) and rem units are among the most popular CSS units, but they serve different purposes and come with their own advantages and disadvantages.
+          </p>
+          <h3>What are Pixels (px)?</h3>
+          <p>
+            Pixels (px) are a fixed-length unit commonly used in screen-based media. They represent the smallest unit of a digital image and are an absolute measure, meaning their size is constant regardless of the size of the parent element or the screen resolution. This makes pixels easy to work with but less adaptable to different screen sizes and user preferences.
+          </p>
+          <h3>What are Rem Units?</h3>
+          <p>
+            Rem units, short for "root em," are relative units based on the root element's font size (typically the &lt;html&gt; element). Unlike pixels, rem units scale with the user's font size preferences and the base font size of the browser, making them more flexible and accessible for different devices and user needs.
+          </p>
+          <h3>Why Use Rem Units Over Pixels?</h3>
+          <p>
+            There are several reasons to choose rem units over pixels when designing and developing a website:
+          </p>
+          <ul>
+            <li><strong>Responsiveness:</strong> Rem units scale with the base font size, making your design more adaptable to different screen sizes and resolutions.</li>
+            <li><strong>Accessibility:</strong> Rem units respect user preferences for font size, ensuring a better experience for users with visual impairments or specific font size requirements.</li>
+            <li><strong>Scalability:</strong> By using rem units, you can easily adjust the base font size for the entire website, making it easier to maintain and scale your design.</li>
+          </ul>
+          <p>
+            For example, imagine a button with a fixed width of 100px. On a high-resolution screen or for a user with a larger font size preference, the button may appear too small and difficult to interact with. By using rem units instead, the button's width can be set relative to the base font size, ensuring it scales appropriately and maintains a consistent appearance across various devices and user preferences.
+          </p>
+          <figure>
+            <img src="./images/px-vs-rem.png" alt="Comparison of a fixed-width button in pixels and a responsive button in rem units">
+            <figcaption>Comparison of a fixed-width button in pixels and a responsive button in rem units</figcaption>
+          </figure>
+          <h3>Conclusion</h3>
+          <p>
+            While pixels remain a popular choice for precise control over layout and design, rem units offer increased flexibility, accessibility, and responsiveness. By using rem units in your CSS, you can create a more user-friendly and adaptable website that caters to a wider range of devices and user preferences.
+          </p>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" id="contact-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-result-content">Congratulations</h3>
+        <h3 class="modal-normal-content">Contact me</h3>
+        <button class="close-modal-button x-button primary-button">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form class="modal-normal-content" id="contact-form">
+          <div class="modal-input-group">
+            <input type="text" id="name" name="name" required>
+            <label for="name">Name:</label>
+          </div>
+          <div class="modal-input-group">
+            <input type="email" id="email" name="email" required>
+            <label for="email">Email:</label>
+          </div>
+          <div class="modal-input-group">
+            <textarea id="message" name="message" rows="5" required></textarea>
+            <label for="message">Message:</label>
+          </div>
+          <button type="submit" class="main-modal-action-button"><i class="fa fa-envelope"></i>Send Message</button>
+        </form>
+        <div class="modal-result-content">
+          <p id="result-message">
+            <div class="spinner"></div>
+          </p>
+          <button class="main-modal-action-button primary-button close-modal-button"><i class="fa-solid fa-xmark"></i>Close</button>
+        </div>
+      </div>
+    </div>
+  </div>   
+
+  <footer>
+    <section class="contact-info">
+      <h4>Feel free to contact me for:</h4>
+        <ul>
+          <li>Web development questions</li>
+          <li>Business inquiries!</li>
+          <li>Feature requests</li>
+        </ul>
+      </p>
+      <button class="contact-button primary-button"><i class="fa fa-envelope"></i>Contact me</button>
+    </section>
+  </footer>
+</body>
+</html>
