@@ -334,7 +334,11 @@ footer {
   background-color: var(--color-base);
   color: #ffffff;
   display: flex;
-  justify-content: center;
+  padding: 1rem;
+}
+
+footer .copyright-notice {
+  margin: 0;
 }
 
 footer section {
