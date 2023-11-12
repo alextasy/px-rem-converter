@@ -29,7 +29,7 @@ function switchBcInputs() {
 }
 
 function copyBcValueToClipboard() {
-  const valueToCopy = bcContainerReversed ? `${bcInput1.value}px` : `${bcInput2.value}rem`; 
+  const valueToCopy = bcContainerReversed ? `${bcInput1.value}px` : `${bcInput2.value}rem`;
   navigator.clipboard.writeText(valueToCopy);
 }
 
@@ -70,6 +70,8 @@ document.getElementById('textarea-copy-button').addEventListener('click', () => 
 // File upload converter
 
 const fileInput = document.getElementById('css-file-input');
+const downloadLink = document.getElementById('download-link');
+const fileBaseSize = document.getElementById('file-base-size');
 
 document.getElementById('file-converter-form').addEventListener('submit', е => {
   е.preventDefault();
@@ -82,7 +84,7 @@ document.getElementById('file-converter-form').addEventListener('submit', е => 
   const reader = new FileReader();
   reader.onload = e => {
     const fileText = e.target.result;
-    const baseSize = parseFloat(document.getElementById('file-base-size').value);
+    const baseSize = parseFloat(fileBaseSize.value);
     const convertedText = convertPxToRem(fileText, baseSize);
     createDownloadLink(convertedText, cssFile.name);
   };
@@ -95,12 +97,14 @@ document.getElementById('file-choose-button').addEventListener('click', () => fi
 fileInput.addEventListener('change', () => {
   const fileName = fileInput.files[0]?.name;
   document.getElementById('file-name').textContent = fileName || 'No file chosen';
+  downloadLink.classList.remove('show');
 });
+
+fileBaseSize.addEventListener('change', () => downloadLink.classList.remove('show'));
 
 function createDownloadLink(cssText, originalFileName) {
   const newFileName = originalFileName.replace(/\.(css|scss|sass|less|styl)$/, '-converted.$1');
 
-  const downloadLink = document.getElementById('download-link');
   const fileBlob = new Blob([cssText], { type: 'text/plain' });
   const url = URL.createObjectURL(fileBlob);
 
@@ -108,82 +112,3 @@ function createDownloadLink(cssText, originalFileName) {
   downloadLink.download = newFileName;
   downloadLink.classList.add('show');
 }
-
-
-// Contact form modal
-
-const modal = document.getElementById('contact-modal');
-
-document.querySelectorAll('.contact-button').forEach(button => {
-  button.addEventListener('click', () => {
-    modal.classList.add('show');
-    setTimeout(() => modal.querySelector('#name').focus(), 10);
-  });
-});
-
-document.querySelectorAll('.close-modal-button').forEach(button => {
-    button.addEventListener('click', () => modal.classList.remove('show'));
-});
-
-document.getElementById('contact-form').addEventListener('submit', async e => {
-  e.preventDefault();
-
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const message = document.getElementById('message').value;
-
-  const API_URL = 'http://localhost:3000';
-  const options = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, email, message }),
-  }
-
-  modal.classList.add('result', 'loading');
-  const messageContainer = document.getElementById('result-message');
-
-  try {
-    const res = await fetch(`${API_URL}/send_email`, options);
-    if (!res.ok) throw new Error('Not ok'); 
-    messageContainer.innerText = 'Your message was successfully sent!';
-  } catch (error) {
-    console.error('Error:', error);
-    messageContainer.innerText = 'Message failed sending :( Please try again in a few minutes!';
-  }
-  modal.classList.remove('loading');
-});
-
-
-// Donation Banner
-
-const donationBanner = document.querySelector('.donation-banner');
-
-document.getElementById('toggle-banner').addEventListener('click', () => {
-  donationBanner.classList.toggle('minimized');
-});
-
-// Adds css variables that are used when animating from the minimized to the expanded state
-// Adds a temporary copy of the banner elements to the dom and expands it to get the current max heights
-function addMaxHeightToBannerElements() {
-  const bannerCopy = donationBanner.cloneNode(true);
-  const contentCopy = bannerCopy.querySelector('.donation-banner-content');
-  
-  bannerCopy.classList.remove('minimized');
-  bannerCopy.style.maxHeight = 'fit-content';
-  contentCopy.style.maxHeight = 'fit-content';
-
-  bannerCopy.style.position = 'absolute';
-  bannerCopy.style.top = '-9999px';
-  document.body.appendChild(bannerCopy);
-
-  const bannerHeight = bannerCopy.getBoundingClientRect().height;
-  const contentHeight = contentCopy.getBoundingClientRect().height;
-  document.documentElement.style.setProperty('--banner-max-height', `${bannerHeight}px`);
-  document.documentElement.style.setProperty('--banner-content-max-height', `${contentHeight}px`);
-
-  document.body.removeChild(bannerCopy);
-}
-  
-addMaxHeightToBannerElements();
-// Max height needs to be recalculated when width changes since content can now take more rows
-window.addEventListener('resize', addMaxHeightToBannerElements);
